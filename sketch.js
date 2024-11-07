@@ -69,12 +69,35 @@ function draw() {
   background(bgColor);
   
   // Go through the capsule array and draw all the capsules
-  for (let i = 0; i < capsules.length; i++) {
-    let capsule = capsules[i];
-    drawCapsule(capsule.x, capsule.y, capsule.r, capsule.side, capsule.color1, capsule.color2, capsule.angle);
+  for (let i = 0; i < 0.6*side; i++) {
+    let x = random(0, 1);
+    let y = random(0, 1);
+
+   // The color associated with the medicine
+   // Color of the upper and lower parts of the capsule
+   let color1 = color(255, 152, 129 );
+   let color2 = color(254, 254, 162 );
+   // Tablet color
+   let color3 = color(139, 195, 219)
+   let color4 = color(255)
+
+   // Generating random Angle
+   let angle = random(TWO_PI);
+
+   // Draw capsules and tablets
+   drawCapsule(x, y, 0.25*side, side, color1, color2, angle);
+    
+   //medicine
+   fill(color3);
+   noStroke();
+   circle((x+0.1)*side, (y+0.1)*side, 0.015*side)
+    
+   fill(color4);
+   circle((x+0.05)*side, (y+0.07)*side, 0.01*side)
   }
+
   // Plate profile size
-  let PlateRadius = 0.265 * side;
+  let PlateRadius = 0.265 * side;/////////
   
   // Use the for loop to draw each plate
   //Since I want the image to appear after clicking, 
@@ -109,6 +132,23 @@ function draw() {
       break;
     }
   }
+}
+
+// Draw the function of the capsule
+function drawCapsule(x, y, r, side, color1, color2, angle) {
+  // Saves the current coordinate system state
+  push();
+  // Move to the center of the capsule and rotate the coordinate system
+  translate(x*side, y*side); // I used width and height to position the coordinates
+  rotate(angle);
+  
+  drawSemiCircle(0, -0.04 * side, 0.05 * r, PI / 2, color1);
+  rect(0, -0.04 * side - 0.02 * r, 0.05 * r, 0.04 * r);
+  drawSemiCircle(0, -0.04 * side - 0.08 * r, 0.05 * r, 3 * PI / 2, color2);
+  rect(0, -0.04 * side - 0.06 * r, 0.05 * r, 0.04 * r);
+  
+  // Restore the original coordinate system state
+  pop();
 }
 
 // Function to draw a plate
@@ -173,8 +213,8 @@ function drawYellowPlate(x,y,r,side){
   
   for (let i = 0; i < 4; i++) {
     let angle = (TWO_PI * i / 4) + ((PI / 4)); // Each circle is spaced 1/4 circle apart and rotated from 4/PI
-    let yx = (x*side) + (0.4 * r) * cos(angle); //
-    let yy = (y*side) + (0.4 * r) * sin(angle); //
+    let yx = (x*side) + (0.4 * r) * cos(angle);
+    let yy = (y*side) + (0.4 * r) * sin(angle);
     circle(yx, yy, 0.1 * r);
   }
 
@@ -638,23 +678,6 @@ function drawSushi(x,y,r,side) {
   circle(x*side-0.039*side, y*side+0.032*side, 0.045*r);  
 }
 
-// Draw the function of the capsule
-function drawCapsule(x, y, r, side, color1, color2, angle) {
-  // Saves the current coordinate system state
-  push();
-  // Move to the center of the capsule and rotate the coordinate system
-  translate(x * width, y * height); // I used width and height to position the coordinates
-  rotate(angle);
-  
-  drawSemiCircle(0, -0.04 * side, 0.05 * r, PI / 2, color1);
-  rect(0, -0.04 * side - 0.02 * r, 0.05 * r, 0.04 * r);
-  drawSemiCircle(0, -0.04 * side - 0.08 * r, 0.05 * r, 3 * PI / 2, color2);
-  rect(0, -0.04 * side - 0.06 * r, 0.05 * r, 0.04 * r);
-  
-  // Restore the original coordinate system state
-  pop();
-}
-
 // A function that draws shapes
 // Draws a function for rotating an ellipse
 function drawRotatedEllipse(cx, cy, w, h, angle) {
@@ -814,9 +837,7 @@ function mousePressed() {
 }
 
 // I chose 3 colors to replace the background
-// The user only needs to press 1, 2, 3 ,4on the keyboard to switch
-// When the user presses the number 4 on the keyboard, capsules appear in the background. 
-// When the user presses 1,2,3, the screen clears automatically
+// The user only needs to press 1, 2, 3 on the keyboard to switch
 function keyPressed() {
   if (key == "1") {
     // When press 1, switch to the pink background
@@ -835,28 +856,5 @@ function keyPressed() {
     operationMode = "moving";
     bgColor = color(173, 216, 230);  // blue background
     capsules = [];
-  }
-  
-  // When press 4, Generate multiple capsules，with 2 colours
-  if (key == "4") {
-    for (let i = 0; i < 5; i++) { 
-      let x = random(0,1); 
-      let y = random(0,1); 
-      let r = random(90, 120); 
-      let side = random(1, 2);
-      let angle = random(TWO_PI);
-      let color1 = color(random(255), random(255), random(255)); 
-      let color2 = color(random(255), random(255), random(255)); 
-
-      capsules.push({
-        x: x,
-        y: y,
-        r: r,
-        side: side,
-        color1: color1,
-        color2: color2,
-        angle: angle
-      });
-    }
   }
 }
