@@ -5,6 +5,10 @@ let burgerVisible = false;
 let pizzaVisible = false;
 let sushiVisible = false;
 
+//If you want to change the background by number, set it first
+let operationMode = "still"; // Initial mode
+let bgColor = [255, 216, 216]; // The initial background color is pink
+
 //Create a plate array to store the positions of the outermost circles of the plates.
 let plates = [
   //The outermost layer of plates elements
@@ -58,7 +62,7 @@ function draw() {
   //keeping it square
   let side = min(windowWidth, windowHeight);
   resizeCanvas(side, side);
-  background(255, 216, 216);
+  background(bgColor);
 
   // Plate profile size
   let PlateRadius = 0.265 * side;
@@ -101,7 +105,6 @@ function draw() {
 // Function to draw a plate
 // Function to draw a pink plate
 function drawPinkPlate(x,y,r,side){
-   
   // Pink floral pattern function
   function drawPinkFlower(x, y) {
     let side = min(windowWidth, windowHeight);
@@ -148,8 +151,7 @@ function drawPinkPlate(x,y,r,side){
 
 // Function to draw a yellow plate
 function drawYellowPlate(x,y,r,side){
-    
-  //黄色盘子
+
   noStroke();
   fill(253, 224, 161);
   circle(x*side, y*side,r);
@@ -160,24 +162,20 @@ function drawYellowPlate(x,y,r,side){
   fill(242, 183, 101 );
   circle(x*side, y*side, 0.65 * r);
   
-  // 圆形花纹
   for (let i = 0; i < 4; i++) {
-    let angle = (TWO_PI * i / 4) + ((PI / 4)); // 每个圆间隔 1/4 圆周，并从 4/PI处开始旋转
-    let yx = (x*side) + (0.4 * r) * cos(angle); // 计算花的 x 坐标
-    let yy = (y*side) + (0.4 * r) * sin(angle); // 计算花的 y 坐标
+    let angle = (TWO_PI * i / 4) + ((PI / 4)); // Each circle is spaced 1/4 circle apart and rotated from 4/PI
+    let yx = (x*side) + (0.4 * r) * cos(angle); //
+    let yy = (y*side) + (0.4 * r) * sin(angle); //
     circle(yx, yy, 0.1 * r);
   }
 
-  //菱形花纹
   drawRhombus(x*side + r*0.4, y*side, 0.04* side, 0.02 * side, 0, color(242, 183, 101));
   drawRhombus(x*side - r*0.4, y*side, 0.04* side, 0.02 * side, 0, color(242, 183, 101));
   drawRhombus(x*side , y*side- r*0.4, 0.02* side, 0.04 * side, 0, color(242, 183, 101));
   drawRhombus(x*side , y*side+ r*0.4, 0.02* side, 0.04 * side, 0, color(242, 183, 101));
 
-  // 如果lightdonut可见，则绘制///////点击消失，点击出现效果
   if (lightdonutVisible) {
-    // 将青柠蛋糕放置在盘子中心位置
-    drawLightDonut(x, y, r, side); // 在盘子的中心位置绘制light donut蛋糕
+    drawLightDonut(x, y, r, side);
   }
 }
 
@@ -786,5 +784,22 @@ function mousePressed() {
       sushiVisible = !sushiVisible;
       break;
     }
+  }
+}
+
+// I chose 3 colors to replace
+// The user only needs to press 1, 2, 3 on the keyboard to switch
+function keyPressed() {
+  if (key == "1") {
+    operationMode = "still";
+    bgColor = [255, 182, 193]; // pink
+  }
+  if (key == "2") {
+    operationMode = "interactive";
+    bgColor = [144, 238, 144]; // green
+  }
+  if (key == "3") {
+    operationMode = "moving";
+    bgColor = [255, 223, 186]; // light orange
   }
 }
