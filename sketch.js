@@ -5,7 +5,7 @@ let burgerVisible = false;
 let pizzaVisible = false;
 let sushiVisible = false;
 
-//If you want to change the background by number, set it first
+//I want to change the background by number1、2、3
 let operationMode = "still"; // Initial mode
 let bgColor = [255, 216, 216]; // The initial background color is pink
 
@@ -52,6 +52,10 @@ let foods = [
   { x: 0.95, y: 1.0 ,type:1},
 ];
 
+let capsules = []; 
+// The array that stores all the capsules,
+// I want her to appear on the back of the plate and the food
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
@@ -63,10 +67,15 @@ function draw() {
   let side = min(windowWidth, windowHeight);
   resizeCanvas(side, side);
   background(bgColor);
-
+  
+  // Go through the capsule array and draw all the capsules
+  for (let i = 0; i < capsules.length; i++) {
+    let capsule = capsules[i];
+    drawCapsule(capsule.x, capsule.y, capsule.r, capsule.side, capsule.color1, capsule.color2, capsule.angle);
+  }
   // Plate profile size
   let PlateRadius = 0.265 * side;
-
+  
   // Use the for loop to draw each plate
   //Since I want the image to appear after clicking, 
   //So in the part I just give the plates' positions, rather than food position
@@ -629,6 +638,23 @@ function drawSushi(x,y,r,side) {
   circle(x*side-0.039*side, y*side+0.032*side, 0.045*r);  
 }
 
+// Draw the function of the capsule
+function drawCapsule(x, y, r, side, color1, color2, angle) {
+  // Saves the current coordinate system state
+  push();
+  // Move to the center of the capsule and rotate the coordinate system
+  translate(x * width, y * height); // I used width and height to position the coordinates
+  rotate(angle);
+  
+  drawSemiCircle(0, -0.04 * side, 0.05 * r, PI / 2, color1);
+  rect(0, -0.04 * side - 0.02 * r, 0.05 * r, 0.04 * r);
+  drawSemiCircle(0, -0.04 * side - 0.08 * r, 0.05 * r, 3 * PI / 2, color2);
+  rect(0, -0.04 * side - 0.06 * r, 0.05 * r, 0.04 * r);
+  
+  // Restore the original coordinate system state
+  pop();
+}
+
 // A function that draws shapes
 // Draws a function for rotating an ellipse
 function drawRotatedEllipse(cx, cy, w, h, angle) {
@@ -787,19 +813,50 @@ function mousePressed() {
   }
 }
 
-// I chose 3 colors to replace
-// The user only needs to press 1, 2, 3 on the keyboard to switch
+// I chose 3 colors to replace the background
+// The user only needs to press 1, 2, 3 ,4on the keyboard to switch
+// When the user presses the number 4 on the keyboard, capsules appear in the background. 
+// When the user presses 1,2,3, the screen clears automatically
 function keyPressed() {
   if (key == "1") {
+    // When press 1, switch to the pink background
     operationMode = "still";
-    bgColor = [255, 182, 193]; // pink
+    bgColor = color(255, 182, 193); //pink background
+    capsules = [];  // Empty the capsule array
   }
   if (key == "2") {
+    // When press 2, switch to the green background
     operationMode = "interactive";
-    bgColor = [144, 238, 144]; // green
+    bgColor = color(144, 238, 144);  // green background
+    capsules = [];
   }
   if (key == "3") {
+    // When press 3, switch to the blue background
     operationMode = "moving";
-    bgColor = [255, 223, 186]; // light orange
+    bgColor = color(173, 216, 230);  // blue background
+    capsules = [];
+  }
+  
+  // When press 4, Generate multiple capsules，with 2 colours
+  if (key == "4") {
+    for (let i = 0; i < 5; i++) { 
+      let x = random(0,1); 
+      let y = random(0,1); 
+      let r = random(90, 120); 
+      let side = random(1, 2);
+      let angle = random(TWO_PI);
+      let color1 = color(random(255), random(255), random(255)); 
+      let color2 = color(random(255), random(255), random(255)); 
+
+      capsules.push({
+        x: x,
+        y: y,
+        r: r,
+        side: side,
+        color1: color1,
+        color2: color2,
+        angle: angle
+      });
+    }
   }
 }
