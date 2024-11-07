@@ -599,7 +599,7 @@ function drawPizza(x,y,r,side) {
   circle(x*side, y*side+0.03*side, 0.09*r);  
   circle(x*side, y*side+0.063*side, 0.09*r);  
   circle(x*side-0.03*side, y*side+0.015*side, 0.09*r); 
-                        
+
   //mushroom on the pizza
   fill(114, 89, 89)
   circle(x*side-0.03*side, y*side-0.01*side, 0.05*r); 
