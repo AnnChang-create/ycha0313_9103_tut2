@@ -8,12 +8,18 @@ In my work, the user can interact with the animation by clicking on an empty pla
 ***
 My choice for the animation effect was the use of interaction. In my design, I have animated the pills in the background and the food on the plate. The user can click on an empty plate to trigger the appearance of the food. This simulates the process of serving. This interaction design adds interest and increases user engagement. To implement this interactive experience, I mainly use keyPressed and mousePressed functions. In Group Code, we use SwitchType to sort food. However, during my work I realised that it would be easier to use the if function in the mousePressed function to achieve the appearance and disappearance of the food. Based on this, I made changes to the group code.
 
+```javascript
+if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type === 2) {
+  lightdonutVisible = !lightdonutVisible; 
+  break;
+}
+```
+
 Also, in the original code for our group, we add noLoop(); to the set up function. This means that the plates, the food and the pills are displayed statically. In other group members' timers and Berlin Noise, the main moving objects are also static and cannot interact with the audience. So I tried to improve the animation and interactive design by triggering the dynamic presentation of the food and tablets through user clicks. This change not only enriched the interactivity of the page but also helped the user to have a more direct understanding of the theme that the work was trying to convey. While other group members' animations mainly involved displacing images, mine showed the process of creating something from nothing, which added visual vividness and interactive fun to our group work.
 
 ### **Part 3: Source of inspiration**
 ***
 Each of these two paintings has its virtues. I took the layering of the painting from the first picture. I took the sharpness of the colours from the second image. The main feature of the first image is the progressive focusing of the circles towards the middle, with a very strong sense of layering. In my design, by adjusting the order in which the food appears, so that the original plate remains stationary, the food appears gradually in the centre of the plate. This design not only increases the visual focus of the user but also makes the image more three-dimensional. Additionally, the second image features bright colours and concentric circles, creating strong colour impact. I used this colour contrast to add a sense of contrast to the overall design, focusing on the plate and food.
-
 
 ![Circle](https://brendandawes.com/content/02-projects/ee/ee_manchester_closeup_001.png)
 
