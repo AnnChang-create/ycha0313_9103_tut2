@@ -97,7 +97,7 @@ function draw() {
   }
 
   // Plate profile size
-  let PlateRadius = 0.265 * side;/////////
+  let PlateDiameter = 0.265 * side;/////////
   
   // Use the for loop to draw each plate
   //Since I want the image to appear after clicking, 
@@ -110,25 +110,25 @@ function draw() {
     //Position the plate
     switch (plate.type){
       case 1:
-        drawPinkPlate(plate.x, plate.y, PlateRadius,side)
+        drawPinkPlate(plate.x, plate.y, PlateDiameter,side)
       break;
       case 2:
-        drawYellowPlate(plate.x, plate.y, PlateRadius,side)
+        drawYellowPlate(plate.x, plate.y, PlateDiameter,side)
       break;
       case 3:
-        drawPurplePlate(plate.x, plate.y, PlateRadius,side)
+        drawPurplePlate(plate.x, plate.y, PlateDiameter,side)
       break;
       case 4:
-        drawBluePlate(plate.x, plate.y, PlateRadius,side)
+        drawBluePlate(plate.x, plate.y, PlateDiameter,side)
       break;
       case 5:
-        drawGreenPlate(plate.x, plate.y, PlateRadius,side)
+        drawGreenPlate(plate.x, plate.y, PlateDiameter,side)
       break;
       case 6:
           drawHotpot(plate.x, plate.y, 0.265,side)
       break;
       case 7:
-        drawRainbowPlate(plate.x, plate.y, PlateRadius,side)
+        drawRainbowPlate(plate.x, plate.y, PlateDiameter,side)
       break;
     }
   }
@@ -157,13 +157,13 @@ function drawPinkPlate(x,y,r,side){
   // Pink floral pattern function
   function drawPinkFlower(x, y) {
     let side = min(windowWidth, windowHeight);
-    let PlateRadius = 0.265 * side;
+    let PlateDiameter = 0.265 * side;
     noStroke();
     fill(255, 205, 205);
-    rect(x, y, 0.06 * PlateRadius, 0.12 * PlateRadius, 10);
-    rect(x, y, 0.12 * PlateRadius, 0.06 * PlateRadius, 10);
+    rect(x, y, 0.06 * PlateDiameter, 0.12 * PlateDiameter, 10);
+    rect(x, y, 0.12 * PlateDiameter, 0.06 * PlateDiameter, 10);
     fill(255);
-    circle(x, y, 0.03 * PlateRadius);
+    circle(x, y, 0.03 * PlateDiameter);
   }
 
   // Pink floral plate 
@@ -255,18 +255,18 @@ function drawGreenPlate(x,y,r,side){
   // Create a leaf pattern function
   function drawLeafPattern(centerX, centerY) {
     let side = min(windowWidth, windowHeight);
-    let PlateRadius = 0.265 * side;
+    let PlateDiameter = 0.265 * side;
     fill(227, 246, 203);
     noStroke();
 
-    let width = 0.13 * PlateRadius;  // Fixed leaf width
-    let height = 0.05 * PlateRadius; // Fixed leaf height
+    let width = 0.13 * PlateDiameter;  // Fixed leaf width
+    let height = 0.05 * PlateDiameter; // Fixed leaf height
 
     // Calculate the coordinates of the two ellipses from centerX and centerY
-    let x1 = centerX - 0.015 * PlateRadius; // The x-coordinate of the first ellipse
-    let x2 = centerX + 0.023 * PlateRadius; // The x-coordinate of the second ellipse
-    let y1 = centerY - 0.005 * PlateRadius; // The x-coordinate of the third ellipse
-    let y2 = centerY + 0.005 * PlateRadius; // The x-coordinate of the forth ellipse
+    let x1 = centerX - 0.015 * PlateDiameter; // The x-coordinate of the first ellipse
+    let x2 = centerX + 0.023 * PlateDiameter; // The x-coordinate of the second ellipse
+    let y1 = centerY - 0.005 * PlateDiameter; // The x-coordinate of the third ellipse
+    let y2 = centerY + 0.005 * PlateDiameter; // The x-coordinate of the forth ellipse
 
     // Draw two rotating elliptical leaves
     drawRotatedEllipse(x1, y1, width, height, PI / 4); 
@@ -791,7 +791,7 @@ function drawRotatedRectangle(x, y, w, h, angle) {
 // Handle click events to control the display of food
 function mousePressed() {
   // The radius of the plate is calculated only once
-  let plateRadius = 0.265 * min(width, height);
+  let PlateDiameter = 0.265 * min(width, height);
 
   // Go through all the plates and check if the mouse click is within the area of the plate
   for (let i = 0; i < plates.length; i++) {
@@ -802,34 +802,34 @@ function mousePressed() {
     // Determine if the click is in the plate area and it is a pink plate (assuming type === 1)
     // After a simple query on the p5.js website，I know that&& is the logical AND operator (AND) 
     // that determines whether two conditions are both true
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type === 1) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type === 1) {
       limecakeVisible = !limecakeVisible; // Toggle the visibility of lime cake
       break; // Once you click on the pink plate, switch and jump out of the loop
     }
     //The same goes for the following code. 
     //Click on different colored plates to display the corresponding food
 
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type === 2) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type === 2) {
       lightdonutVisible = !lightdonutVisible; 
       break;
     }
     
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type === 3) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type === 3) {
       darkdonutVisible = !darkdonutVisible;
       break;
     }
    
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type ===4) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type ===4) {
       burgerVisible = !burgerVisible;
       break;
     }
     
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type ===7) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type ===7) {
       pizzaVisible = !pizzaVisible;
       break;
     }
     
-    if (dist(mouseX, mouseY, plateX, plateY) <= plateRadius && plate.type ===5) {
+    if (dist(mouseX, mouseY, plateX, plateY) <= PlateDiameter && plate.type ===5) {
       sushiVisible = !sushiVisible;
       break;
     }
