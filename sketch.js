@@ -97,7 +97,7 @@ function draw() {
   }
 
   // Plate profile size
-  let PlateDiameter = 0.265 * side;/////////
+  let PlateDiameter = 0.265 * side;
   
   // Use the for loop to draw each plate
   //Since I want the image to appear after clicking, 
@@ -184,7 +184,7 @@ function drawPinkPlate(x,y,r,side){
     let angle = TWO_PI * i / 8; // Each flower is spaced 1/8 circumference apart
     let px = (x * side) + (0.4 * r) * cos(angle); // Calculate the x-coordinate of the flower
     let py = (y * side) + (0.4 * r) * sin(angle); // Calculate the y-coordinate of the flower
-    drawPinkFlower(px, py); // draw flowers
+    drawPinkFlower(px, py);
   }
   
   // What I want to do here is use the if function. 
